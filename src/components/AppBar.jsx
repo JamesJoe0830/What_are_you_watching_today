@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsPlayBtnFill, BsPerson, BsSearch, BsMoon } from "react-icons/bs";
 import Recommendation from "../pages/Recommendation";
+
 
 const MoveToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -10,6 +11,11 @@ const MoveToTop = () => {
 
 export default function AppBar() {
   const navigate = useNavigate();
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const handleSideBarOpen = () => {
+    setIsSideBarOpen(!isSideBarOpen);
+  };
+
   return (
     <div>
       <AppBarBox>
@@ -20,16 +26,27 @@ export default function AppBar() {
             <BsPerson />
           </SelfInfo>
         </AppBarTop>
-        <AppBarDiv>
-          <Logo
-            onClick={() => {
-              navigate("/");
-              MoveToTop();
-            }}
-          >
-            {" "}
-            <BsPlayBtnFill /> 오늘 뭐 볼까 ?
-          </Logo>
+        <AppBarBottom>
+          <LogoBox>
+            <CategoriesBox
+              onClick={(e) => {
+                handleSideBarOpen();
+                // navigate("/Categories");
+              }}
+            >
+
+              <BsPlayBtnFill />
+            </CategoriesBox>
+            <LogoName
+              onClick={() => {
+                navigate("/");
+                MoveToTop();
+              }}
+            >
+              {" "}
+              오늘 뭐 볼까 ?
+            </LogoName>
+          </LogoBox>
           <SearchBoxDiv>
             <SearchDiv>
               {" "}
@@ -74,22 +91,21 @@ export default function AppBar() {
           <Mode>
             <BsMoon />
           </Mode>
-        </AppBarDiv>
+        </AppBarBottom>
       </AppBarBox>
     </div>
   );
 }
 const AppBarBox = styled.div`
   /* background: linear-gradient(to bottom, #000000, #4f4f51); */
-  background: black;
+  background: #000000;
+
   position: fixed;
   top: 0;
-
   width: 100%;
-  max-width: 1500px;
-
-  margin: 0px auto;
-  margin-bottom: auto;
+  /* max-width: 1600px; */
+  margin: 0 auto;
+  overflow: hidden;
 `;
 const AppBarTop = styled.div`
   display: flex;
@@ -108,7 +124,7 @@ const SelfInfo = styled.div`
   padding: 5px;
   cursor: pointer;
 `;
-const AppBarDiv = styled.div`
+const AppBarBottom = styled.div`
   display: flex;
   color: #d5d5d5;
   font-size: 20px;
@@ -121,9 +137,22 @@ const AppBarDiv = styled.div`
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #ccc;
 `;
-const Logo = styled.div`
-  font-size: 30px;
+const LogoBox = styled.div`
+  display: flex;
   padding: 20px;
+`;
+const CategoriesBox = styled.button`
+  border: 10px;
+  background-color: transparent;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  opacity: 1;
+  border-radius: 10px;
+`;
+const LogoName = styled.div`
+  margin-left: 20px;
+  font-size: 30px;
   cursor: pointer;
 `;
 const SearchBoxDiv = styled.div`
@@ -144,6 +173,7 @@ const SearchButton = styled.button`
   border: none;
   padding: 10px 20px;
   font-size: 20px;
+  border-radius: 10px;
   opacity: 0.5;
 `;
 
@@ -164,27 +194,14 @@ const Mode = styled.div`
   cursor: pointer;
 `;
 const MenuDiv = styled.div`
-  margin: 0px 40px 0px 20px;
-  padding:18px;
-  text-align:center;
-  /* border-right: solid 1.5px grey;  */
+  /* margin: 0px 40px 0px 20px; */
+  padding: 18px 40px 18px 40px;
+  text-align: center;
+  border-radius: 5px;
+  transition: all 0.9s, color 0.3;
 
-
-  /* :hover
-            {
-                background-color: #717171;
-            } */
-  :hover {
-    color: 	#FAFAD2;
-  }
-  :hover::before {
-    opacity: 1;
-    background-color: #fff;
-    font-weight:bold;
-    -webkit-transform: scaleY(1);
-    transform: scaleY(1);
-    transition: -webkit-transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02),
-      opacity 0.4s;
-    transition: transform 0.6s cubic-bezier(0.08, 0.35, 0.13, 1.02), opacity;
+  &:hover {
+    background-color: #717171;
+    color: rgb(255, 255, 255, 100);
   }
 `;

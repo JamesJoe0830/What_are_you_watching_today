@@ -1,13 +1,18 @@
 import React from 'react';
 import AppBar from '../components/AppBar';
+
+import TotalWrap from '../styled-components/TotalWrap';
 import WrapBox from '../styled-components/WrapBox';
 export default function Top20() {
     return (
         <div>
-            <WrapBox>
+            <TotalWrap>
             <AppBar/>
-            카테고리 페이지입니다.
+
+            <WrapBox>
+
             </WrapBox>
+            </TotalWrap>
         </div>
     );
 }

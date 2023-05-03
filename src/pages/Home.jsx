@@ -2,18 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import AppBar from "../components/AppBar";
 import BannerSlider from "../components/BannerSlider";
-import Categories from "../components/Categories";
+
 import Login from "../images/login.png";
 import WrapBox from "../styled-components/WrapBox";
-
+import TotalWrap from "../styled-components/TotalWrap";
 
 export default function Home() {
   return (
-    <div>
-
+    <div>  
+<AppBar />
+      <TotalWrap>
+     
       <WrapBox>
+      
       {/* <Categories/> */}
-      <AppBar />
+  
 
         <BannerBox>
           <BannerSlider/>
@@ -21,10 +24,10 @@ export default function Home() {
         </BannerBox>
 
       </WrapBox>
+      </TotalWrap>
     </div>
   );
 }
-
 
 const BannerBox = styled.div`
   display: flex;
