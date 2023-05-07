@@ -6,6 +6,7 @@ import BannerSlider from "../components/BannerSlider";
 import Login from "../images/login.png";
 import WrapBox from "../styled-components/WrapBox";
 import TotalWrap from "../styled-components/TotalWrap";
+import SideBar from "../components/SideBar";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
       <TotalWrap>
      
       <WrapBox>
-      
+      <SideBar/>
       {/* <Categories/> */}
   
 

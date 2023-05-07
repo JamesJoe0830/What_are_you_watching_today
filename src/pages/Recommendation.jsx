@@ -7,12 +7,12 @@ export default function Recommendation() {
   return (
     <div>
       <>
-      <TotalWrap>
-      <AppBar />
-        <WrapBox>
-      <SideBar/>
-        
-        </WrapBox>
+        <TotalWrap>
+          <AppBar />
+
+          <WrapBox>
+            <SideBar />
+          </WrapBox>
         </TotalWrap>
       </>
     </div>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsPlayBtnFill, BsPerson, BsSearch, BsMoon } from "react-icons/bs";
-import Recommendation from "../pages/Recommendation";
 
 
 const MoveToTop = () => {
@@ -12,12 +11,14 @@ const MoveToTop = () => {
 export default function AppBar() {
   const navigate = useNavigate();
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [text, setText] = useState("");
+
   const handleSideBarOpen = () => {
     setIsSideBarOpen(!isSideBarOpen);
   };
 
   return (
-    <div>
+    <div> 
       <AppBarBox>
         <AppBarTop>
           {" "}
@@ -50,8 +51,11 @@ export default function AppBar() {
           <SearchBoxDiv>
             <SearchDiv>
               {" "}
-              무엇을 검색하시겠습니까 ?
-              {/* <input type="text" value={search} onChange={onChange} /> */}
+              {/* input tag */}
+              <Searchinput type="text"  placeholder="무엇을 찾고 계십니까?" value={text} onChange={(e)=>{
+                setText(e.target.value);
+              }}  />
+              {/* value={search} onChange={onChange} */}
             </SearchDiv>
             <SearchButton>
               <Search>
@@ -106,6 +110,7 @@ const AppBarBox = styled.div`
   /* max-width: 1600px; */
   margin: 0 auto;
   overflow: hidden;
+  z-index:1;
 `;
 const AppBarTop = styled.div`
   display: flex;
@@ -167,6 +172,15 @@ const SearchDiv = styled.div`
   color: grey;
 `;
 
+const Searchinput = styled.input`
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  opacity: 0.5;
+`;
 const SearchButton = styled.button`
   background-color: transparent;
   color: white;
