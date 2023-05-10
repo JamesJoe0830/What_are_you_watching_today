@@ -33,7 +33,7 @@ export default function BannerSlider() {
 }
 
 const Container = styled.div`
-	width: 800px;
+	width: 650px;
 
   .slick-dots {
     .slick-active {

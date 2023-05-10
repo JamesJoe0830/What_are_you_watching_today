@@ -110,7 +110,7 @@ const AppBarBox = styled.div`
   /* max-width: 1600px; */
   margin: 0 auto;
   overflow: hidden;
-  z-index:1;
+  z-index:1000;
 `;
 const AppBarTop = styled.div`
   display: flex;
@@ -119,6 +119,7 @@ const AppBarTop = styled.div`
   color: white;
 `;
 const Login = styled.div`
+  font-size:14px;
   padding: 10px;
   justify-content: center;
   align-self: center;
@@ -132,12 +133,12 @@ const SelfInfo = styled.div`
 const AppBarBottom = styled.div`
   display: flex;
   color: #d5d5d5;
-  font-size: 20px;
+  font-size: 10px;
   border-top: solid 3px white;
   border-bottom: solid 3px white;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
+  height: 62px;
   padding: 0 20px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #ccc;
@@ -150,34 +151,35 @@ const CategoriesBox = styled.button`
   border: 10px;
   background-color: transparent;
   color: white;
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
   opacity: 1;
   border-radius: 10px;
 `;
 const LogoName = styled.div`
   margin-left: 20px;
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
 `;
 const SearchBoxDiv = styled.div`
   display: flex;
-  border-left: solid 2px white;
-  border-right: solid 2px white;
+  border-left: solid 0.8px white;
+  border-right: solid 0.8px white;
 `;
 
 const SearchDiv = styled.div`
-  padding: 16px 300px 12px 27px;
+  padding: 16px 30px 12px 27px;
   font-size: 20px;
-  color: grey;
+  color: #9e9e9e;
 `;
 
 const Searchinput = styled.input`
   background-color: transparent;
+  width: 400px;
   color: white;
   border: none;
   padding: 10px 20px;
-  font-size: 20px;
+  font-size: 15px;
   border-radius: 10px;
   opacity: 0.5;
 `;
@@ -199,12 +201,12 @@ const Search = styled.div`
 const MenuBoxDiv = styled.div`
   display: flex;
   justify-content: flex-start;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bolder;
   cursor: pointer;
 `;
 const Mode = styled.div`
-  font-size: 40px;
+  font-size: 30px;
   cursor: pointer;
 `;
 const MenuDiv = styled.div`

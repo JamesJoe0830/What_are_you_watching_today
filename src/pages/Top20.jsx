@@ -44,7 +44,7 @@ export default function Top20() {
               <OttLogoImg>
                 <WathchaImg src={Watcha} alt="WatchaLogo" />
               </OttLogoImg>
-              <Top20Div> 왓챠 상위 20 콘텐츠</Top20Div>
+              <Top20Div> 디즈니플러스  상위 20 콘텐츠</Top20Div>
 
               <SliderBox>
                 <NetflixSlider />
@@ -73,7 +73,7 @@ const Top20Div = styled.div`
   display:flex;
   color:white;
   margin:20px 20px 20px 80px;
-  font-size:30px;
+  font-size:25px;
   font-weight: 700px;
 `;
 const YoutubeImg = styled.img`

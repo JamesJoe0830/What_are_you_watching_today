@@ -5,8 +5,9 @@ const TotalWrap = styled.div`
   min-height: 200vh;
   height: 100%;
   top:0;
-  background: #100f0f;
-  background: linear-gradient(to bottom, #000000, #3b3b3c);
+  background: white;
+  /* background: linear-gradient(to bottom, #000000, #3b3b3c); */
+
 
 
   overflow:hidden;

@@ -33,12 +33,13 @@ export default function Home() {
 const BannerBox = styled.div`
   display: flex;
   padding: 200px 40px 40px 40px;
+  margin: 0 auto;
 `;
 
 const LoginSevice = styled.div`
   padding: 0px 40px 40px 40px;
   margin-left: 30px;
-  width: 500px;
+  width: 400px;
   height: 600px;
 `
 const LoginImg = styled.img`

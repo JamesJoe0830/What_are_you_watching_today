@@ -13,6 +13,9 @@ export default function Notice() {
             <WrapBox>
             <SideBar/>
             즐겨찾기 페이지입니다.
+            <>
+            
+            </>
 
             </WrapBox>
             </TotalWrap>

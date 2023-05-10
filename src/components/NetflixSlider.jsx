@@ -3,16 +3,75 @@ import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Banner1 from "../images/Banner1.png";
+import Banner2 from "../images/Banner2.png";
+const rankList = {
+  Youtube: [
+    {
+      id: 1,
+      rank: 1,
+      image:
+        "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
+    },
+    {
+      id: 2,
+      rank: 2,
+      image:
+        "https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2023/03/03/693cef21-b67a-4ce4-81c2-96d5ab8bb43b.jpg",
+    },
+    {
+      id: 3,
+      rank: 3,
+      image:
+        "https://i.namu.wiki/i/_nKvJd8s2C7MRnE1s5V_-qY-SpLgLw92THx6aakpiEx8EBTuaV5b_4aRZddnKMMcDWuotqJnKlj0nmohEiYRwQ.webp",
+    },
+    {
+      id: 4,
+      rank: 4,
+      image:
+        "https://www.sciencetimes.co.kr/wp-content/uploads/2023/03/image_readtop_2023_2900_16726249815299109.jpg",
+    },
+    {
+      id: 5,
+      rank: 5,
+      image:
+        "https://upload.wikimedia.org/wikipedia/ko/thumb/c/ce/%EC%BD%94%EB%93%9C8_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg/220px-%EC%BD%94%EB%93%9C8_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg",
+    },
+    {
+      id: 6,
+      rank: 6,
+      image: "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
+    },
+    {
+      id: 7,
+      rank: 7,
+      image: "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
+    },
+    {
+      id: 8,
+      rank: 8,
+      image:
+        "https://upload.wikimedia.org/wikipedia/ko/thumb/c/ce/%EC%BD%94%EB%93%9C8_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg/220px-%EC%BD%94%EB%93%9C8_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg",
+    },
+    {
+      id: 9,
+      rank: 9,
+      image: "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
+    },
+    {
+      id: 10,
+      rank: 10,
+      image: "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
+    },
+  ],
+};
 
-import Netflix1 from "../images/Netflix1.png";
-import Netflix2 from "../images/Netflix2.png";
-
-export default function NetflixSlider() {
+export default function YoutubeSlider() {
   const settings = {
     arrows: true,
     dots: false,
     infinite: true,
-    slidesToShow: 7,
+    slidesToShow: 5,
     slidesToScroll: 5,
     variableWidth: false,
   };
@@ -20,36 +79,17 @@ export default function NetflixSlider() {
     <div>
       <Container>
         <Slider {...settings}>
-          <>
-            <BannerImg src={Netflix1} alt="Netflix1" />
-          </>
-          <>
-            <BannerImg src={Netflix2} alt="Netflix2" />
-          </>
-          <>
-            <BannerImg src={Netflix1} alt="Netflix1" />
-          </>
-          <>
-            <BannerImg src={Netflix2} alt="Netflix2" />
-          </>
-          <>
-            <BannerImg src={Netflix1} alt="Netflix1" />
-          </>
-          <>
-            <BannerImg src={Netflix2} alt="Netflix2" />
-          </>
-          <>
-            <BannerImg src={Netflix1} alt="Netflix1" />
-          </>
-          <>
-            <BannerImg src={Netflix2} alt="Netflix2" />
-          </>
-          <>
-            <BannerImg src={Netflix1} alt="Netflix1" />
-          </>
-          <>
-            <BannerImg src={Netflix2} alt="Netflix2" />
-          </>
+        {rankList.Youtube.map((props) => {
+          return (
+            <div key={props.id}>
+              <ContentsBox>
+                <RankImg>{props.rank}</RankImg>
+                <BannerImg src={props.image} alt="rank" />
+              </ContentsBox>
+            </div>
+          );
+        })}
+         
         </Slider>
       </Container>
     </div>
@@ -57,15 +97,14 @@ export default function NetflixSlider() {
 }
 
 const Container = styled.div`
-  width: 1500px;
+  /* background-color: white; */
+  width: 1100px;
   margin: 0px auto;
   margin-bottom: 200px;
+  /* overflow-x:scroll;
+    scroll-snap-type: x mandatory; */
 
   /* overflow:hidden; */
-
-  /* overflow-x: scroll;
-    scroll-snap-type: x mandatory; */
-  /* 스크롤로 통제 */
 
   .slick-dots {
     .slick-active {
@@ -78,10 +117,60 @@ const Container = styled.div`
     }
   }
 `;
-const BannerImg = styled.img`
+
+// const BannerImg = styled.img`
+//   height: 180px;
+//   width: 270px;
+//   padding: 0px auto;
+//   margin: 0px auto;
+//   cursor: pointer;
+// `;
+
+const SlideBox = styled.div`
+  display: flex;
+  width: 1200px;
+  height: 240px;
+  margin: 0px auto;
+  overflow:hidden;
+  /* background:white; */
+  /* overflow:auto;
+    white-space: nowrap; */
+  /* overflow-x: scroll;
+    scroll-snap-type: x mandatory; */
+`;
+const ContentsBox = styled.div`
+  display: flex;
   height: 300px;
-  width: 200px;
+  width: 180px;
+
+  /* overflow:hidden; */
+  /* position:bottom; */
+`;
+const RankImg = styled.div`
+  /* background-color: #e0dede; */
+
+  position: absolute;
+  bottom: 0;
+
+  height: 150px;
+  color: #1e1e1e;
+  -webkit-text-stroke: 2px #acacac;
+  font-size: 120px;
+  font-weight: 700;
+  text-shadow: 3px 4px 5px black;
+  z-index: 1;
+`;
+const BannerImg = styled.img`
+  position: absolute;
+  right:-1;
+  height: 240px;
+  width: 160px;
   border-radius: 20px;
   padding: 10px;
-  cursor:pointer;
+  cursor: pointer;
+  /* z-index: 98; */
+  
 `;
+
+
+
