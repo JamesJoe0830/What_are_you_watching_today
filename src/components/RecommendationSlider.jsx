@@ -37,16 +37,16 @@ const rankList = {
       image:
         "https://upload.wikimedia.org/wikipedia/ko/thumb/c/ce/%EC%BD%94%EB%93%9C8_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg/220px-%EC%BD%94%EB%93%9C8_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg",
     },
-    // {
-    //   id: 6,
-    //   rank: 6,
-    //   image: "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
-    // },
-    // {
-    //   id: 7,
-    //   rank: 7,
-    //   image: "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
-    // },
+    {
+      id: 6,
+      rank: 6,
+      image: "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
+    },
+    {
+      id: 7,
+      rank: 7,
+      image: "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
+    },
   ],
 };
 
@@ -54,7 +54,7 @@ export default function RecommendationSlider() {
   return (
     <div>
       <SlideBox>
-        {rankList.Youtube.map((props) => {
+        {rankList.Youtube.slice(0,5).map((props) => {
           return (
             <div key={props.id}>
               <ContentsBox>
@@ -80,6 +80,7 @@ const SlideBox = styled.div`
   width: 1100px;
   height: 240px;
   margin: 0px auto;
+  margin-bottom: 120px;
   overflow:hidden;
   /* background:white; */
   /* overflow:auto;

@@ -1,8 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-
-
+import React, {useState} from 'react';
 import Recommendation from "./pages/Recommendation";
 import Top20 from "./pages/Top20";
 import Notice from "./pages/Notice";
@@ -10,6 +9,7 @@ import Notice from "./pages/Notice";
 export default function App() {
   return (
     <div>
+     
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

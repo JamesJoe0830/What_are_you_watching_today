@@ -10,21 +10,20 @@ import SideBar from "../components/SideBar";
 
 export default function Home() {
   return (
-    <div>  
-<AppBar />
+    <div>
+      <AppBar />
       <TotalWrap>
-     
-      <WrapBox>
-      <SideBar/>
-      {/* <Categories/> */}
-  
+        <WrapBox>
+          {/* <SideBar/> */}
+          {/* <Categories/> */}
 
-        <BannerBox>
-          <BannerSlider/>
-          <LoginSevice><LoginImg src={Login} alt="Login" /></LoginSevice>
-        </BannerBox>
-
-      </WrapBox>
+          <BannerBox>
+            <BannerSlider />
+            <LoginSevice>
+              <LoginImg src={Login} alt="Login" />
+            </LoginSevice>
+          </BannerBox>
+        </WrapBox>
       </TotalWrap>
     </div>
   );
@@ -41,9 +40,8 @@ const LoginSevice = styled.div`
   margin-left: 30px;
   width: 400px;
   height: 600px;
-`
+`;
 const LoginImg = styled.img`
   background-image: url(${Login});
-  width:100%;
-
+  width: 100%;
 `;

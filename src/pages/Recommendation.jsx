@@ -6,11 +6,12 @@ import WrapBox from "../styled-components/WrapBox";
 import SideBar from "../components/SideBar";
 import Youtube from "../images/YoutubeLogo.png";
 import Netflix from "../images/NetflixLogo.png";
-import Watcha from "../images/WatchaLogo.png";
+import Disney from "../images/DisneyLogo.png";
 
 import YoutubeSlider from "../components/YoutubeSlider";
 import NetflixSlider from "../components/NetflixSlider";
 import RecommendationSlider from "../components/RecommendationSlider";
+import RecoYoutube from "../components/RecoYoutube";
 
 export default function Top20() {
   return (
@@ -25,10 +26,10 @@ export default function Top20() {
               <OttLogoImg>
                 <YoutubeImg src={Youtube} alt="youtubeLogo" />
               </OttLogoImg>
-              <Top20Div> 유투브 추천 콘텐츠</Top20Div>
+              <Top20Div> 유튜브 추천 콘텐츠</Top20Div>
 
               <SliderBox>
-                <RecommendationSlider />
+                <RecoYoutube />
               </SliderBox>
               
             </OttBox>
@@ -44,7 +45,7 @@ export default function Top20() {
             </OttBox>
             <OttBox>
               <OttLogoImg>
-                <WathchaImg src={Watcha} alt="WatchaLogo" />
+                <DisneyImg src={Disney} alt="DisneyLogo" />
               </OttLogoImg>
               <Top20Div> 디즈니 플러스 추천 콘텐츠</Top20Div>
 
@@ -82,7 +83,7 @@ const YoutubeImg = styled.img`
 const NetflixImg = styled.img`
   width: 100%;
 `;
-const WathchaImg = styled.img`
+const DisneyImg = styled.img`
   width: 100%;
 `;
 const SliderBox = styled.div`

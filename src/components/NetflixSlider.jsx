@@ -74,6 +74,32 @@ export default function YoutubeSlider() {
     slidesToShow: 5,
     slidesToScroll: 5,
     variableWidth: false,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        }
+      }
+    ]
   };
   return (
     <div>
@@ -152,10 +178,11 @@ const RankImg = styled.div`
   position: absolute;
   bottom: 0;
 
-  height: 150px;
+  height: 120px;
   color: #1e1e1e;
+  /* color: white; */
   -webkit-text-stroke: 2px #acacac;
-  font-size: 120px;
+  font-size: 70px;
   font-weight: 700;
   text-shadow: 3px 4px 5px black;
   z-index: 1;
