@@ -119,6 +119,9 @@ const BannerImg = styled.img`
   padding: 10px;
   cursor: pointer;
   /* z-index: 98; */
+  &:hover {
+    transform: scale(1.15);
+  }
 `;
 
 const RefreshDiv = styled.span`

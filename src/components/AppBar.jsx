@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { BsPlayBtnFill, BsPerson, BsSearch, BsMoon } from "react-icons/bs";
-import SideMenu from "./SideMenu";
+import { BsPerson, BsSearch, BsMoon } from "react-icons/bs";
+import {MdMenu} from "react-icons/md"
 import SideBar from "./SideBar";
+
 const MoveToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }; // 상단으로 이동 (beahvior : auto, smooth)
 
 export default function AppBar() {
   const navigate = useNavigate();
-  // const [isSideBarOpen, setIsSideBarOpen] = useState(false);
   const [text, setText] = useState("");
   const [isOpen, setIsOpen] = useState(false); //menu 초기값을 false로 설정
   const handleMenu = () => {
-    setIsOpen (isOpen => !isOpen); // on off 개념
-  }
+    setIsOpen((isOpen) => !isOpen); // on off 개념
+  };
+  const closeSideBar = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div>
       <AppBarBox>
@@ -29,14 +33,13 @@ export default function AppBar() {
         <AppBarBottom>
           <LogoBox>
             <CategoriesBox
-              onClick={(e) => {
+              onClick={() => {
                 handleMenu();
-                // navigate("/Categories");
               }}
             >
-              {isOpen && <Overlay onClick={handleMenu}/>}
-              <SideBar isOpen ={isOpen}/>
-              <BsPlayBtnFill />
+              {isOpen && <Overlay onClick={closeSideBar} />}
+              <SideBar isOpen={isOpen} />
+              <MdMenu />
             </CategoriesBox>
             <LogoName
               onClick={() => {
@@ -150,7 +153,7 @@ const AppBarBottom = styled.div`
 `;
 const LogoBox = styled.div`
   display: flex;
-  width:13rem;
+  width: 13rem;
   padding: 20px;
 `;
 const CategoriesBox = styled.button`
@@ -161,6 +164,7 @@ const CategoriesBox = styled.button`
   cursor: pointer;
   opacity: 1;
   border-radius: 10px;
+  
 `;
 const LogoName = styled.div`
   margin-left: 20px;
@@ -186,7 +190,6 @@ const SearchBoxDiv = styled.div`
 `;
 
 const SearchDiv = styled.div`
-
   padding: 16px 30px 12px 27px;
   font-size: 20px;
   color: #9e9e9e;
@@ -224,7 +227,7 @@ const MenuBoxDiv = styled.div`
   font-size: 17px;
   font-weight: bolder;
   cursor: pointer;
-    @media screen and (max-width: 480px) {
+  @media screen and (max-width: 480px) {
     font-size: 14px;
   }
 `;
@@ -240,20 +243,20 @@ const MenuDiv = styled.div`
   transition: all 0.9s, color 0.3;
 
   &:hover {
-    background-color: #717171;
+    /* background-color: #717171; */
     color: rgb(255, 255, 255, 100);
+    transform: scale(1.3);
   }
-    @media screen and (max-width: 480px) {
-      padding : 20px;
+  @media screen and (max-width: 480px) {
+    padding: 20px;
   }
 `;
 
-const Overlay= styled.div`
-    position: fixed;
-  margin-top: 100px;
+const Overlay = styled.div`
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-`
+`;

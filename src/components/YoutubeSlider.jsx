@@ -158,7 +158,7 @@ const Container = styled.div`
 const SlideBox = styled.div`
   display: flex;
   width: 1300px;
-  height: 240px;
+  height: 300px;
   margin: 0px auto;
   overflow:hidden;
   /* background:white; */
@@ -169,6 +169,7 @@ const SlideBox = styled.div`
 `;
 const ContentsBox = styled.div`
   display: flex;
+  padding-top: 20px;
   height: 200px;
   width: 180px;
   /* overflow:hidden; */
@@ -197,7 +198,10 @@ const BannerImg = styled.img`
   padding: 10px;
   cursor: pointer;
   /* z-index: 98; */
-  
+  &:hover {
+    transform: scale(1.15);
+    margin-left: 10px;
+  }
 `;
 
 

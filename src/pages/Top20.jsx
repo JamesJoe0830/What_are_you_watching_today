@@ -23,7 +23,7 @@ export default function Top20() {
           <TotalOttBox>
             <OttBox>
               <OttLogoImg>
-                <YoutubeImg src={Youtube} alt="youtubeLogo" />
+              <YoutubeImg src={Youtube} alt="youtubeLogo" />
               </OttLogoImg>
               <Top20Div> 유튜브 상위 20 콘텐츠</Top20Div>
 

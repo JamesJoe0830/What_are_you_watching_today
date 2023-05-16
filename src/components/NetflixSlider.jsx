@@ -166,10 +166,11 @@ const SlideBox = styled.div`
 `;
 const ContentsBox = styled.div`
   display: flex;
+  padding-top: 25px;
   height: 300px;
   width: 180px;
 
-  /* overflow:hidden; */
+  overflow:hidden;
   /* position:bottom; */
 `;
 const RankImg = styled.div`
@@ -196,6 +197,11 @@ const BannerImg = styled.img`
   padding: 10px;
   cursor: pointer;
   /* z-index: 98; */
+  
+  &:hover {
+    transform: scale(1.18);
+    margin-left:5px;
+  }
   
 `;
 
