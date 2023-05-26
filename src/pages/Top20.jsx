@@ -9,7 +9,7 @@ import Netflix from "../images/NetflixLogo.png";
 import Disney from "../images/DisneyLogo.png";
 
 
-import YoutubeSlider from "../components/YoutubeSlider";
+import Youtube20Slider from "../components/Youtube20Slider";
 import NetflixSlider from "../components/NetflixSlider";
 
 export default function Top20() {
@@ -28,7 +28,7 @@ export default function Top20() {
               <Top20Div> 유튜브 상위 20 콘텐츠</Top20Div>
 
               <SliderBox>
-                <YoutubeSlider />
+                <Youtube20Slider />
               </SliderBox>
             </OttBox>
             <OttBox>

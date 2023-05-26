@@ -14,10 +14,11 @@ export default function AppBar() {
   const [text, setText] = useState("");
   const [isOpen, setIsOpen] = useState(false); //menu 초기값을 false로 설정
   const handleMenu = () => {
-    setIsOpen((isOpen) => !isOpen); // on off 개념
+    console.log(isOpen);
+    setIsOpen((isOpen)=>  !isOpen); // on off 개념
   };
   const closeSideBar = () => {
-    setIsOpen(false);
+    setIsOpen((isOpen) => !isOpen);
   };
 
   return (
@@ -37,10 +38,12 @@ export default function AppBar() {
                 handleMenu();
               }}
             >
-              {isOpen && <Overlay onClick={closeSideBar} />}
-              <SideBar isOpen={isOpen} />
+              {isOpen && <Overlay onClick={()=>{closeSideBar(); }}/>}
+              
               <MdMenu />
             </CategoriesBox>
+            <SideBar isOpen={isOpen} />
+
             <LogoName
               onClick={() => {
                 navigate("/");
@@ -258,5 +261,5 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(0 0 0 / 30%);
 `;
