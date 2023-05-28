@@ -14,11 +14,10 @@ export default function AppBar() {
   const [text, setText] = useState("");
   const [isOpen, setIsOpen] = useState(false); //menu 초기값을 false로 설정
   const handleMenu = () => {
-    console.log(isOpen);
     setIsOpen((isOpen) => !isOpen); // on off 개념
   };
   const closeSideBar = () => {
-    setIsOpen((isOpen) => !isOpen);
+    setIsOpen(true);
   };
 
   return (
@@ -48,7 +47,8 @@ export default function AppBar() {
               )}
               <MdMenu />
             </CategoriesBox>
-            <SideBar isOpen={isOpen} />
+
+            {isOpen && <SideBar isOpen={isOpen} />}
 
             <LogoName
               onClick={() => {

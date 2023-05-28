@@ -74,8 +74,8 @@ export default function YoutubeSlider() {
   const [top20Movie, setTop20Movie] = useState([]);
  
   const getTop20Movie = async () => {
-    const APIURL = "https://jsonplaceholder.typicode.com/photos";
-    // "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
+    const APIURL =     "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
+
     await axios.get(APIURL).then((response) => {
       setTop20Movie(response.data);
       console.log(response);
@@ -122,9 +122,9 @@ export default function YoutubeSlider() {
   };
   return (
     <div>
-      {top20Movie !== undefined &&
+      {/* {top20Movie !== undefined &&
         top20Movie !== null &&
-        top20Movie.length > 0 && (
+        top20Movie.length > 0 && ( */}
           <Container>
             <Slider {...settings}>
               {top20Movie.map((props) => {
@@ -139,7 +139,7 @@ export default function YoutubeSlider() {
               })}
             </Slider>
           </Container>
-        )}
+        {/* )} */}
     </div>
   );
 }
@@ -165,14 +165,6 @@ const Container = styled.div`
     }
   }
 `;
-
-// const BannerImg = styled.img`
-//   height: 180px;
-//   width: 270px;
-//   padding: 0px auto;
-//   margin: 0px auto;
-//   cursor: pointer;
-// `;
 
 const SlideBox = styled.div`
   display: flex;
