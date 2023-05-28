@@ -1,10 +1,10 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Banner1 from "../images/Banner1.png";
-import Banner2 from "../images/Banner2.png";
+import axios from "axios";
 const rankList = {
   Youtube: [
     {
@@ -40,12 +40,14 @@ const rankList = {
     {
       id: 6,
       rank: 6,
-      image: "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
+      image:
+        "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
     },
     {
       id: 7,
       rank: 7,
-      image: "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
+      image:
+        "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
     },
     {
       id: 8,
@@ -56,17 +58,34 @@ const rankList = {
     {
       id: 9,
       rank: 9,
-      image: "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
+      image:
+        "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
     },
     {
       id: 10,
       rank: 10,
-      image: "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
+      image:
+        "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
     },
   ],
 };
 
 export default function YoutubeSlider() {
+  const [top20Movie, setTop20Movie] = useState([]);
+ 
+  const getTop20Movie = async () => {
+    const APIURL = "https://jsonplaceholder.typicode.com/photos";
+    // "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
+    await axios.get(APIURL).then((response) => {
+      setTop20Movie(response.data);
+      console.log(response);
+    });
+  };
+
+  useEffect(() => {
+    getTop20Movie();
+  }, []);
+
   const settings = {
     arrows: true,
     dots: false,
@@ -82,42 +101,45 @@ export default function YoutubeSlider() {
           slidesToShow: 5,
           slidesToScroll: 5,
           infinite: true,
-          dots: false
-        }
+          dots: false,
+        },
       },
       {
         breakpoint: 800,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-        }
+        },
       },
       {
         breakpoint: 480,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-        }
-      }
-    ]
+        },
+      },
+    ],
   };
   return (
     <div>
-      <Container>
-        <Slider {...settings}>
-        {rankList.Youtube.map((props) => {
-          return (
-            <div key={props.id}>
-              <ContentsBox>
-                <RankImg>{props.rank}</RankImg>
-                <BannerImg src={props.image} alt="rank" />
-              </ContentsBox>
-            </div>
-          );
-        })}
-         
-        </Slider>
-      </Container>
+      {top20Movie !== undefined &&
+        top20Movie !== null &&
+        top20Movie.length > 0 && (
+          <Container>
+            <Slider {...settings}>
+              {top20Movie.map((props) => {
+                return (
+                  <div key={props.id}>
+                    <ContentsBox>
+                      <RankImg>{props.rank}</RankImg>
+                      <BannerImg src={props.image} alt="rank" />
+                    </ContentsBox>
+                  </div>
+                );
+              })}
+            </Slider>
+          </Container>
+        )}
     </div>
   );
 }
@@ -157,7 +179,7 @@ const SlideBox = styled.div`
   width: 1200px;
   height: 240px;
   margin: 0px auto;
-  overflow:hidden;
+  overflow: hidden;
   /* background:white; */
   /* overflow:auto;
     white-space: nowrap; */
@@ -170,7 +192,7 @@ const ContentsBox = styled.div`
   height: 300px;
   width: 180px;
 
-  overflow:hidden;
+  overflow: hidden;
   /* position:bottom; */
 `;
 const RankImg = styled.div`
@@ -190,20 +212,16 @@ const RankImg = styled.div`
 `;
 const BannerImg = styled.img`
   position: absolute;
-  right:-1;
+  right: -1;
   height: 240px;
   width: 160px;
   border-radius: 20px;
   padding: 10px;
   cursor: pointer;
   /* z-index: 98; */
-  
+
   &:hover {
     transform: scale(1.18);
-    margin-left:5px;
+    margin-left: 5px;
   }
-  
 `;
-
-
-

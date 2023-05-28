@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BsPerson, BsSearch, BsMoon } from "react-icons/bs";
-import {MdMenu} from "react-icons/md"
+import { MdMenu } from "react-icons/md";
 import SideBar from "./SideBar";
 
 const MoveToTop = () => {
@@ -15,7 +15,7 @@ export default function AppBar() {
   const [isOpen, setIsOpen] = useState(false); //menu 초기값을 false로 설정
   const handleMenu = () => {
     console.log(isOpen);
-    setIsOpen((isOpen)=>  !isOpen); // on off 개념
+    setIsOpen((isOpen) => !isOpen); // on off 개념
   };
   const closeSideBar = () => {
     setIsOpen((isOpen) => !isOpen);
@@ -38,8 +38,14 @@ export default function AppBar() {
                 handleMenu();
               }}
             >
-              {isOpen && <Overlay onClick={()=>{closeSideBar(); }}/>}
-              
+              {isOpen && (
+                <Overlay
+                  onClick={() => {
+                    closeSideBar();
+                    console.log("이거");
+                  }}
+                />
+              )}
               <MdMenu />
             </CategoriesBox>
             <SideBar isOpen={isOpen} />
@@ -167,7 +173,7 @@ const CategoriesBox = styled.button`
   cursor: pointer;
   opacity: 1;
   border-radius: 10px;
-  
+  z-index: 21;
 `;
 const LogoName = styled.div`
   margin-left: 20px;
@@ -262,4 +268,5 @@ const Overlay = styled.div`
   bottom: 0;
   left: 0;
   background-color: rgb(0 0 0 / 30%);
+  z-index: 20;
 `;
