@@ -8,7 +8,6 @@ import Youtube from "../images/YoutubeLogo.png";
 import Netflix from "../images/NetflixLogo.png";
 import Disney from "../images/DisneyLogo.png";
 
-
 import NetflixSlider from "../components/NetflixSlider";
 import RecommendationSlider from "../components/RecommendationSlider";
 import RecoYoutube from "../components/RecoYoutube";

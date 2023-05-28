@@ -16,6 +16,7 @@ export default function App() {
           <Route path="/Recommendation" element={<Recommendation />} />
           <Route path="/Top20" element={<Top20 />} />
           <Route path="/Notice" element={<Notice />} />
+          <Route path="/Notice" element={<Notice />} />
         </Routes>
       </Router>
     </div>

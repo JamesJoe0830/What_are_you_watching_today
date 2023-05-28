@@ -276,6 +276,13 @@ const videoList = [
 // };
 
 export default function Youtube20Slider() {
+  // const [,]
+  // const getAlbum = async () => {
+  //   const APIURL = `${API_PATHNAME}/${churchName}/life/1`;
+  //   axios.get(APIURL).then((response) => {
+  //     setAlbum(response.data);
+  //   });
+  // };
   const settings = {
     arrows: true,
     dots: false,

@@ -124,7 +124,7 @@ const AppBarBox = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  /* max-width: 1600px; */
+  max-width: 1600px;
   margin: 0 auto;
   overflow: hidden;
   z-index: 1000;

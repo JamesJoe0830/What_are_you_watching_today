@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Youtube from "../images/YoutubeLogo.png";
 import Netflix from "../images/NetflixLogo.png";
 import Disney from "../images/DisneyLogo.png";
@@ -6,6 +6,7 @@ import { Navigation } from "react-minimal-side-navigation";
 // import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import { Icon } from "semantic-ui-react";
 import styled from "styled-components";
+import axios from "axios";
 const youtubeSubMenu = [
   {
     id: 1,
@@ -119,7 +120,32 @@ export default function SideBar({ isOpen }) {
   // }
 
   const [isSubOpen, setIsSubOpen] = useState(false);
+  const [movieGenre,setMovieGenere] = useState([]);
+  const [dramaGenre,setDramaGenre] = useState([]);
+  const [youtubeGenre,setYoutubeGenre] = useState([]);
 
+  const getMovieGenre = async () => {
+    const MovieGenreUrl =  "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
+    await axios.get(MovieGenreUrl).then((response) => {
+      setMovieGenere(response.data);
+    });
+  };
+   const getDramaGenre = async () => {
+    const MovieGenreUrl =  "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
+    await axios.get(MovieGenreUrl).then((response) => {
+      setDramaGenre(response.data);
+    });
+  };
+   const getYoutubeGenre = async () => {
+    const MovieGenreUrl =  "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
+    await axios.get(MovieGenreUrl).then((response) => {
+      setYoutubeGenre(response.data);
+    });
+  };
+
+  // useEffect(() => {
+  //   getGenre();
+  // }, []);  
   const isSubMenuOpen = () => {
     setIsSubOpen((isSubOpen) => !isSubOpen);
   };
@@ -137,18 +163,15 @@ export default function SideBar({ isOpen }) {
               isOpen = true;
             }}
           >
-            <YoutubeImg src={Youtube} alt="youtubeLogo" />
+            <Subbutton onClick={()=>{getMovieGenre();}}>영화</Subbutton>
           </OTTdiv>
           {isSubOpen && (
             <div>
-              {youtubeSubMenu.map((props) => {
+              {movieGenre.map((props) => {
                 return (
                   <div key={props.id}>
                     <SubMeunBox>
                       <SubMenu
-                        // onClick={() => {
-                        //   closeSideBar();
-                        // }}
                       >
                         {props.genre_name}
                       </SubMenu>
@@ -159,11 +182,43 @@ export default function SideBar({ isOpen }) {
             </div>
           )}
           <OTTdiv>
-            <NetflixImg src={Netflix} alt="NetflixLogo" />
+            <Subbutton onClick={()=>{getDramaGenre();}}>드라마 및 기타</Subbutton>
           </OTTdiv>
+          {isSubOpen && (
+            <div>
+              {dramaGenre.map((props) => {
+                return (
+                  <div key={props.id}>
+                    <SubMeunBox>
+                      <SubMenu
+                      >
+                        {props.genre_name}
+                      </SubMenu>
+                    </SubMeunBox>
+                  </div>
+                );
+              })}
+            </div>
+          )}
           <OTTdiv>
-            <DisneyImg src={Disney} alt="DisneyLogo" />
+          <Subbutton onClick={()=>{getYoutubeGenre();}}>유튜브</Subbutton>
           </OTTdiv>
+          {isSubOpen && (
+            <div>
+              {youtubeGenre.map((props) => {
+                return (
+                  <div key={props.id}>
+                    <SubMeunBox>
+                      <SubMenu
+                      >
+                        {props.genre_name}
+                      </SubMenu>
+                    </SubMeunBox>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </SideBarContainer>
       )}
     </>
@@ -225,5 +280,21 @@ const SubMenu = styled.div`
   cursor: pointer;
   &:hover {
     transform: scale(1.2);
+  }
+`;
+
+const Subbutton= styled.button`
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 10px;
+  opacity: 0.5;
+  cursor: pointer;
+  &:hover {
+    /* background-color: #717171; */
+    color: rgb(255, 255, 255, 100);
+    transform: scale(1.3);
   }
 `;
