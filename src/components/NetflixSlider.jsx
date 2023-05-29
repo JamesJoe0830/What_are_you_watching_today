@@ -70,21 +70,22 @@ const rankList = {
   ],
 };
 
-export default function YoutubeSlider() {
+export default function YoutubeSlider({ provider }) {
   const [top20Movie, setTop20Movie] = useState([]);
- 
-  const getTop20Movie = async () => {
-    const APIURL =     "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
 
-    await axios.get(APIURL).then((response) => {
-      setTop20Movie(response.data);
-      console.log(response);
+  const getTop20Movie = async () => {
+    const APIURL = "http://localhost:3100/movies/top20";
+    const params = {
+      provider_name: provider,
+    };
+    await axios.get(APIURL, { params }).then((response) => {
+      setTop20Movie(response.data.moviesList);
     });
   };
 
   useEffect(() => {
     getTop20Movie();
-  }, []);
+  }, [provider]);
 
   const settings = {
     arrows: true,
@@ -125,21 +126,21 @@ export default function YoutubeSlider() {
       {/* {top20Movie !== undefined &&
         top20Movie !== null &&
         top20Movie.length > 0 && ( */}
-          <Container>
-            <Slider {...settings}>
-              {top20Movie.map((props) => {
-                return (
-                  <div key={props.id}>
-                    <ContentsBox>
-                      <RankImg>{props.rank}</RankImg>
-                      <BannerImg src={props.image} alt="rank" />
-                    </ContentsBox>
-                  </div>
-                );
-              })}
-            </Slider>
-          </Container>
-        {/* )} */}
+      <Container>
+        <Slider {...settings}>
+          {top20Movie.map((props) => {
+            return (
+              <div key={props.id}>
+                <ContentsBox>
+                  <RankImg>{props.rank}</RankImg>
+                  <BannerImg src={props.poster_img} alt="rank" />
+                </ContentsBox>
+              </div>
+            );
+          })}
+        </Slider>
+      </Container>
+      {/* )} */}
     </div>
   );
 }

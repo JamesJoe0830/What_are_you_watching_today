@@ -7,7 +7,7 @@ import SideBar from "../components/SideBar";
 import Youtube from "../images/YoutubeLogo.png";
 import Netflix from "../images/NetflixLogo.png";
 import Disney from "../images/DisneyLogo.png";
-
+import provider from "../provider/provider";
 
 import Youtube20Slider from "../components/Youtube20Slider";
 import NetflixSlider from "../components/NetflixSlider";
@@ -23,7 +23,7 @@ export default function Top20() {
           <TotalOttBox>
             <OttBox>
               <OttLogoImg>
-              <YoutubeImg src={Youtube} alt="youtubeLogo" />
+                <YoutubeImg src={Youtube} alt="youtubeLogo" />
               </OttLogoImg>
               <Top20Div> 유튜브 상위 20 콘텐츠</Top20Div>
 
@@ -38,17 +38,17 @@ export default function Top20() {
               <Top20Div> 넷플릭스 상위 20 콘텐츠</Top20Div>
 
               <SliderBox>
-                <NetflixSlider />
+                <NetflixSlider provider={provider.netflix} />
               </SliderBox>
             </OttBox>
             <OttBox>
               <OttLogoImg>
-              <DisneyImg src={Disney} alt="DisneyLogo" />
+                <DisneyImg src={Disney} alt="DisneyLogo" />
               </OttLogoImg>
-              <Top20Div> 디즈니 플러스  상위 20 콘텐츠</Top20Div>
+              <Top20Div> 디즈니 플러스 상위 20 콘텐츠</Top20Div>
 
               <SliderBox>
-                <NetflixSlider />
+                <NetflixSlider provider={provider.disney_plus} />
               </SliderBox>
             </OttBox>
           </TotalOttBox>
@@ -61,9 +61,7 @@ const TotalOttBox = styled.div`
   /* position: relative; */
 `;
 
-const OttBox = styled.div`
- 
-`;
+const OttBox = styled.div``;
 
 const OttLogoImg = styled.div`
   /* display: flex; */
@@ -71,10 +69,10 @@ const OttLogoImg = styled.div`
   margin: 50px;
 `;
 const Top20Div = styled.div`
-  display:flex;
-  color:white;
-  margin:20px 20px 20px 80px;
-  font-size:25px;
+  display: flex;
+  color: white;
+  margin: 20px 20px 20px 80px;
+  font-size: 25px;
   font-weight: 700px;
 `;
 const YoutubeImg = styled.img`
@@ -89,5 +87,4 @@ const DisneyImg = styled.img`
 const SliderBox = styled.div`
   /* width:100%; */
   /* height:400px; */
-
 `;
