@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import { BsPerson, BsSearch, BsMoon } from "react-icons/bs";
 import { MdMenu } from "react-icons/md";
 import SideBar from "./SideBar";
-
+import axios from "axios";
 const MoveToTop = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }; // 상단으로 이동 (beahvior : auto, smooth)
@@ -20,12 +20,23 @@ export default function AppBar() {
     setIsOpen(true);
   };
 
+  const logout = async () => {
+    const response = await axios.get("http://localhost:3100/users/logout");
+    console.log(response.data);
+    // if (response.data.success === true && sessionStorage.length > 0) {
+    window.sessionStorage.clear();
+    // }
+  };
   return (
     <div>
       <AppBarBox>
         <AppBarTop>
           {" "}
-          <Login>로그인</Login>
+          <Login>
+            <button value="로그아웃" onClick={() => logout()}>
+              로그아웃
+            </button>{" "}
+          </Login>
           <SelfInfo>
             <BsPerson />
           </SelfInfo>
@@ -83,8 +94,13 @@ export default function AppBar() {
           <MenuBoxDiv>
             <MenuDiv
               onClick={() => {
-                navigate("/Recommendation");
-                MoveToTop();
+                if (sessionStorage.length > 0) {
+                  navigate("/Recommendation");
+                  MoveToTop();
+                } else {
+                  alert("로그인이 필요한 서비스입니다");
+                  navigate("/");
+                }
               }}
             >
               {" "}

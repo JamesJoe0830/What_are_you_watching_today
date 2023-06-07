@@ -6,7 +6,7 @@ import BannerSlider from "../components/BannerSlider";
 import Login from "../images/login.png";
 import WrapBox from "../styled-components/WrapBox";
 import TotalWrap from "../styled-components/TotalWrap";
-
+import LoginTab from "../components/Login";
 
 export default function Home() {
   return (
@@ -14,13 +14,13 @@ export default function Home() {
       <AppBar />
       <TotalWrap>
         <WrapBox>
-
           {/* <Categories/> */}
 
           <BannerBox>
             <BannerSlider />
             <LoginSevice>
-              <LoginImg src={Login} alt="Login" />
+              {/* <LoginImg src={Login} alt="Login" /> */}
+              <LoginTab />
             </LoginSevice>
           </BannerBox>
         </WrapBox>

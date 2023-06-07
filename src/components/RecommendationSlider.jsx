@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { FiRefreshCw } from "react-icons/fi";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const rankList = {
   Youtube: [
@@ -37,31 +40,44 @@ const rankList = {
     {
       id: 6,
       rank: 6,
-      image: "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
+      image:
+        "https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2023/01/PS23012500038.jpg",
     },
     {
       id: 7,
       rank: 7,
-      image: "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
+      image:
+        "https://img.vogue.co.kr/vogue/2022/08/style_62ff22470d478-649x930.png",
     },
   ],
 };
 
 export default function RecommendationSlider() {
+  const [movieList, setMovieList] = useState([]);
+
+  const getMovieList = async () => {
+    const response = await axios.get("http://localhost:3100/recommend-movies");
+    console.log(response.data);
+    setMovieList(response.data.movieList);
+  };
+
+  useEffect(() => {
+    getMovieList();
+  }, []);
+
   return (
     <div>
       <SlideBox>
-        {rankList.Youtube.slice(0,5).map((props) => {
+        {movieList.map((props, rank) => {
           return (
             <div key={props.id}>
               <ContentsBox>
-                {/* <RankImg>{props.rank}</RankImg> */}
-                <BannerImg src={props.image} alt="rank" />
+                <RankImg>{rank + 1}</RankImg>
+                <BannerImg src={props.poster_img} alt="rank" />
               </ContentsBox>
             </div>
           );
         })}
-
         <RefreshButton>
           <RefreshDiv>
             <FiRefreshCw />
@@ -78,7 +94,7 @@ const SlideBox = styled.div`
   height: 240px;
   margin: 0px auto;
   margin-bottom: 120px;
-  overflow:hidden;
+  overflow: hidden;
   /* background:white; */
   /* overflow:auto;
     white-space: nowrap; */
@@ -90,7 +106,7 @@ const ContentsBox = styled.div`
   height: 240px;
   width: 200px;
   align-items: flex-end;
-  overflow:hidden;
+  overflow: hidden;
 
   /* position:bottom; */
 `;
@@ -109,7 +125,7 @@ const RankImg = styled.div`
 `;
 const BannerImg = styled.img`
   position: absolute;
-  right:-1;
+  right: -1;
   height: 240px;
   width: 160px;
   border-radius: 20px;

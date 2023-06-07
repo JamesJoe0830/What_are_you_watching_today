@@ -1,8 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
-import Netflix1 from "../images/Netflix1.png";
-import Netflix2 from "../images/Netflix2.png";
 import { FiRefreshCw } from "react-icons/fi";
 
 const rankList = {
@@ -74,9 +71,7 @@ export default function RecoYoutube() {
         {rankList.Youtube.slice(0,4).map((props) => {
           return (
             <div key={props.id}>
-              <ContentsBox>
-                {/* <RankImg>{props.rank}</RankImg> */}
-                
+              <ContentsBox>                
                 <BannerImg src={props.image} alt="rank" />
               </ContentsBox>
             </div>
@@ -127,20 +122,6 @@ const ContentsBox = styled.div`
      overflow-x: scroll;
     scroll-snap-type: x mandatory;
   }
-`;
-const RankImg = styled.div`
-  /* background-color: #e0dede; */
-
-  position: absolute;
-  bottom: 0;
-
-  height: 120px;
-  color: #1e1e1e;
-  -webkit-text-stroke: 2px #acacac;
-  font-size: 120px;
-  font-weight: 700;
-  text-shadow: 3px 4px 5px black;
-  z-index: 1;
 `;
 const BannerImg = styled.img`
   position: absolute;

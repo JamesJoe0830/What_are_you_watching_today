@@ -119,35 +119,44 @@ export default function SideBar({ isOpen }) {
   //   setIsOpen (isOpen => !isOpen); // on off 개념
   // }
 
-  const [isSubOpen, setIsSubOpen] = useState(false);
-  const [movieGenre,setMovieGenere] = useState([]);
-  const [dramaGenre,setDramaGenre] = useState([]);
-  const [youtubeGenre,setYoutubeGenre] = useState([]);
+  const [isMovieSubOpen, setIsMovieSubOpen] = useState(false);
+  const [isDramaSubOpen, setIsDramaSubOpen] = useState(false);
+  const [isVideoSubOpen, setIsVideoSubOpen] = useState(false);
+  const [movieGenre, setMovieGenere] = useState([]);
+  const [dramaGenre, setDramaGenre] = useState([]);
+  const [youtubeGenre, setYoutubeGenre] = useState([]);
 
   const getMovieGenre = async () => {
-    const MovieGenreUrl =  "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
+    const MovieGenreUrl = "http://localhost:3100/genres";
     await axios.get(MovieGenreUrl).then((response) => {
-      setMovieGenere(response.data);
+      console.log(response.data);
+      setMovieGenere(response.data.genresList);
     });
   };
-   const getDramaGenre = async () => {
-    const MovieGenreUrl =  "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
-    await axios.get(MovieGenreUrl).then((response) => {
-      setDramaGenre(response.data);
+  const getDramaGenre = async () => {
+    const DramaGenreUrl = "http://localhost:3100/tvgenres";
+    await axios.get(DramaGenreUrl).then((response) => {
+      setDramaGenre(response.data.genresList);
     });
   };
-   const getYoutubeGenre = async () => {
-    const MovieGenreUrl =  "http://172.20.10.12:3100/movies/top20?provider_name=netflix";
-    await axios.get(MovieGenreUrl).then((response) => {
-      setYoutubeGenre(response.data);
+  const getYoutubeGenre = async () => {
+    const VideoGenreUrl = "http://localhost:3100/video-genres";
+    await axios.get(VideoGenreUrl).then((response) => {
+      setYoutubeGenre(response.data.videoGenreList);
     });
   };
 
   // useEffect(() => {
   //   getGenre();
-  // }, []);  
-  const isSubMenuOpen = () => {
-    setIsSubOpen((isSubOpen) => !isSubOpen);
+  // }, []);
+  const isSubMovieMenuOpen = () => {
+    setIsMovieSubOpen((isMovieSubOpen) => !isMovieSubOpen);
+  };
+  const isSubDramaMenuOpen = () => {
+    setIsDramaSubOpen((isDramaSubOpen) => !isDramaSubOpen);
+  };
+  const isSubVideoMenuOpen = () => {
+    setIsVideoSubOpen((isVideoSubOpen) => !isVideoSubOpen);
   };
   // const closeSideBar = () => {
 
@@ -159,60 +168,79 @@ export default function SideBar({ isOpen }) {
           <CateTitle> 카테고리 </CateTitle>
           <OTTdiv
             onClick={() => {
-              isSubMenuOpen();
+              isSubMovieMenuOpen();
               isOpen = true;
             }}
           >
-            <Subbutton onClick={()=>{getMovieGenre();}}>영화</Subbutton>
+            <Subbutton
+              onClick={() => {
+                getMovieGenre();
+              }}
+            >
+              영화
+            </Subbutton>
           </OTTdiv>
-          {isSubOpen && (
+          {isMovieSubOpen && (
             <div>
               {movieGenre.map((props) => {
                 return (
                   <div key={props.id}>
                     <SubMeunBox>
-                      <SubMenu
-                      >
-                        {props.genre_name}
-                      </SubMenu>
+                      <SubMenu>{props.genre_name}</SubMenu>
                     </SubMeunBox>
                   </div>
                 );
               })}
             </div>
           )}
-          <OTTdiv>
-            <Subbutton onClick={()=>{getDramaGenre();}}>드라마 및 기타</Subbutton>
+          <OTTdiv
+            onClick={() => {
+              isSubDramaMenuOpen();
+              isOpen = true;
+            }}
+          >
+            <Subbutton
+              onClick={() => {
+                getDramaGenre();
+              }}
+            >
+              드라마 및 기타
+            </Subbutton>
           </OTTdiv>
-          {isSubOpen && (
+          {isDramaSubOpen && (
             <div>
               {dramaGenre.map((props) => {
                 return (
                   <div key={props.id}>
                     <SubMeunBox>
-                      <SubMenu
-                      >
-                        {props.genre_name}
-                      </SubMenu>
+                      <SubMenu>{props.genre_name}</SubMenu>
                     </SubMeunBox>
                   </div>
                 );
               })}
             </div>
           )}
-          <OTTdiv>
-          <Subbutton onClick={()=>{getYoutubeGenre();}}>유튜브</Subbutton>
+          <OTTdiv
+            onClick={() => {
+              isSubVideoMenuOpen();
+              isOpen = true;
+            }}
+          >
+            <Subbutton
+              onClick={() => {
+                getYoutubeGenre();
+              }}
+            >
+              유튜브
+            </Subbutton>
           </OTTdiv>
-          {isSubOpen && (
+          {isVideoSubOpen && (
             <div>
               {youtubeGenre.map((props) => {
                 return (
                   <div key={props.id}>
                     <SubMeunBox>
-                      <SubMenu
-                      >
-                        {props.genre_name}
-                      </SubMenu>
+                      <SubMenu>{props.genre_name}</SubMenu>
                     </SubMeunBox>
                   </div>
                 );
@@ -226,7 +254,7 @@ export default function SideBar({ isOpen }) {
 }
 const CateTitle = styled.div`
   font-size: 20px;
-  text-align:center;
+  text-align: center;
 
   margin-top: 1.5rem;
   margin-bottom: 2rem;
@@ -236,8 +264,7 @@ const OTTdiv = styled.div`
   border-top: 1px solid rgb(159, 159, 159);
   margin: 20px;
   padding-top: 20px;
-  text-align:center;
-
+  text-align: center;
 `;
 const YoutubeImg = styled.img`
   width: 50%;
@@ -271,19 +298,18 @@ const SideBarContainer = styled.div`
 `;
 const SubMeunBox = styled.div`
   font-size: 10px;
- 
 `;
 const SubMenu = styled.div`
   font-size: 15px;
   margin-top: 20px;
-  text-align:center;
+  text-align: center;
   cursor: pointer;
   &:hover {
     transform: scale(1.2);
   }
 `;
 
-const Subbutton= styled.button`
+const Subbutton = styled.button`
   background-color: transparent;
   color: white;
   border: none;
