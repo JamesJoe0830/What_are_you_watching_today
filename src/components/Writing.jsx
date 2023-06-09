@@ -5,11 +5,12 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { AiOutlineAlert } from "react-icons/ai";
 import Notice from "../pages/Notice";
 import "./Writing.css";
-const Writing = ({ isWriteOpen, setIsWriteOpen}) => {
-  const handleCancel = () => {
-    setIsWriteOpen((isWriteOpen) => false);
-  };
+import format from "date-fns/format";
+import axios from "axios";
 
+const Writing = ({ isWriteOpen, setIsWriteOpen }) => {
+  const nowDate = Date.now();
+  const [submitDate, setSubmitDate] = useState("");
   const [writeContent, setWriteContent] = useState({
     title: "",
     content: "",
@@ -17,7 +18,30 @@ const Writing = ({ isWriteOpen, setIsWriteOpen}) => {
 
   const [viewContent, setViewContent] = useState([]);
   // 등록 버튼 onClick 했을 경우에 빈배열에 writeContent라는 객체를 복사해서 concat해주는 기능 push는 기존의 배열이 바뀌어버림
-  console.log("view", viewContent);
+  console.log("게시판 글", viewContent);
+  console.log("날짜", submitDate);
+
+  //submit 할떄 post로 서버에 등록 post는 비동기적으로 처리할 필요 없음
+  const submitReview = () => {
+    const APIURL = "http://localhost:3100";
+    
+    // date: submitDate.date,
+
+    axios.post(`${APIURL}/board/posts`, {
+        title: writeContent.title,
+        post: writeContent.content,
+      
+      }) 
+      .catch(function(error) {
+        console.log("실패");
+        console.log(error);
+      });
+     
+  };
+
+  const handleCancel = (e) => {
+    setIsWriteOpen((isWriteOpen) => false);
+  };
   const getValue = (e) => {
     const { name, value } = e.target;
     setWriteContent({
@@ -53,10 +77,10 @@ const Writing = ({ isWriteOpen, setIsWriteOpen}) => {
             placeholder="관련 문의사항을 작성해주세요."
             onChange={(event, editor) => {
               const data = editor.getData();
-              console.log({ event, editor, data });
+              console.log("ㅇ", { event, editor, data });
               setWriteContent({
                 ...writeContent,
-                content: data,
+                content: data.replace(/<[^>]*>?/g, ''),
               });
             }}
             onBlur={(event, editor) => {
@@ -76,29 +100,38 @@ const Writing = ({ isWriteOpen, setIsWriteOpen}) => {
             취소
           </CancelBtn>
           <SubmitBtn
+            //제출할때 유효성 검사 1)제목이 없으면 alert 2)내용이 없으면 alert 3)나머지는 날짜 및 데이터
+            //변화하고 submitReview로 서버에 데이터 post로 전송 그리고 창 닫아주기
+            type ="submit"
             onClick={() => {
-              setViewContent(viewContent?.concat({ ...writeContent }));
-              handleCancel();
+              if (writeContent.title === "") {
+                alert("제목을 입력해주시기 바랍니다.");
+              } else if (writeContent.content === "") {
+                alert("내용을 입력해주시기 바랍니다.");
+              } else {
+                setSubmitDate(format(nowDate, "yyyy/MM/dd"));
+                setViewContent(viewContent?.concat({ ...writeContent }));
+                submitReview();
+                // handleCancel();
+              }
             }}
           >
             등록
           </SubmitBtn>
         </ButtonContainerdiv>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <ViewContatiner>
-          {viewContent.map((data) => {
-            return (
-              <div>
-                <ViewTitle>{data.title}</ViewTitle>
-                <div>{data.content}</div>
-              </div>
-            );
-          })}
-        </ViewContatiner>
+
+        <div>
+          <ViewContatiner>
+            {viewContent.map((data) => {
+              return (
+                <div>
+                  <ViewTitle>{data.title}</ViewTitle>
+                  <div>{data.content}</div>
+                </div>
+              );
+            })}
+          </ViewContatiner>
+        </div>
       </div>
     );
   }
@@ -122,7 +155,6 @@ const Cautiondiv = styled.div`
   margin-bottom: 30px;
   padding: 10px;
   border-radius: 5px;
-  /* background: #282a3a; */
   background: #3e4b43;
   color: #bcbbbb;
   vertical-align: middle;
@@ -161,7 +193,7 @@ const CancelBtn = styled.button`
 `;
 
 const SubmitBtn = styled(CancelBtn)`
-  background: #61b761;
+  background: green;
   color: white;
   &:hover {
     background: #064d06;
@@ -170,6 +202,7 @@ const SubmitBtn = styled(CancelBtn)`
 `;
 const ViewContatiner = styled.div`
   display: flex;
+
   color: white;
   background: green;
   width: 80%;
