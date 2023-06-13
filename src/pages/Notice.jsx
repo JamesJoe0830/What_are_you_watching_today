@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import WrapBox from "../styled-components/WrapBox";
 import AppBar from "../components/AppBar";
@@ -6,18 +6,23 @@ import TotalWrap from "../styled-components/TotalWrap";
 import SideBar from "../components/SideBar";
 import Writing from "../components/Writing";
 import { BsPencil } from "react-icons/bs";
-// import axios from "axios";
+import axios from "axios";
 
 const Notice = () => {
   const [noticeData, setNoticeData] = useState([]);
   const [isWriteOpen, setIsWriteOpen] = useState(false);
+  const [Page,setPage] = useState(1);
+  const MaxPage = Math.ceil(noticeData.length / 10);
 
-  // const getNoticeData = async () =>{
-  //   const APIURL = "http://localhost:3100";
-  //   axios.get(`${APIURL}/board`).then((reponse)=>{
-  //     setNoticeData(response.data);
-  //   });
-  // };
+  const getNoticeData = async () => {
+    const APIURL = "http://localhost:3100";
+    axios.get(`${APIURL}/board/posts`).then((response) => {
+      setNoticeData(response.data.boardList);
+    });
+  };
+  useEffect(() => {
+    getNoticeData();
+  }, []);
   const truncate = (title, n) => {
     return title?.length > n ? title.substr(0, n) + ".." : title;
   };
@@ -47,19 +52,38 @@ const Notice = () => {
 
               <NoticeContainer>
                 <NoticeHead>
-                  <NoticeNum>No</NoticeNum>
+                  <NoticeTitle>No</NoticeTitle>
                   <NoticeTitle>제목</NoticeTitle>
-                  <NoticeWriter>글쓴이</NoticeWriter>
-                  <NoticeDate>날짜</NoticeDate>
+                  <NoticeTitle>글쓴이</NoticeTitle>
+                  <NoticeTitle>날짜</NoticeTitle>
                 </NoticeHead>
                 <NoticeBody>
-                  {noticeData.map((data) => {
-                    return <div>
-                      {truncate(data?.title, 20)};
-                      {data.date};
-                      </div>;
+                  {noticeData.slice(10*(Page-1),10*((Page-1)+1)).map((data) => {
+                    return (
+                      <div key={data.id}>
+                        <DataContainer>
+                        <DataNum>{data.id}</DataNum>
+                        <DataTitle>{truncate(data?.title, 10)}</DataTitle>
+                        </DataContainer>
+                      </div>
+                    );
                   })}
                 </NoticeBody>
+                <PageContainer>
+                <PrevBtn> {"<"} </PrevBtn>
+                <PageNum>
+                {Array.from({ length: 15 }, (value, i) => (
+                  <NumButton
+                    onClick={() => {
+                      setPage(i + 1);
+                    }}
+                  >
+                    {i + 1}
+                  </NumButton>
+                ))}
+                <NextBtn> {">"} </NextBtn>
+              </PageNum>
+            </PageContainer>
               </NoticeContainer>
             </>
           </WrapBox>
@@ -107,14 +131,14 @@ const WritingButton = styled.button`
   place-content: center;
 
   margin-top: 20px;
-  margin-right: 5%;
+  margin-right: 4.5%;
   align-items: center;
   float: right;
   cursor: pointer;
   &:hover {
     background: #4e4b4b;
     color: white;
-  }
+  } 
 `;
 const NoticeDiv = styled.div`
   margin: 0 auto;
@@ -124,7 +148,7 @@ const NoticeDiv = styled.div`
 const NoticeContainer = styled.div`
   margin: 0 auto;
   margin-top: 100px;
-  background: #3e4b43;
+  /* background: #3e4b43; */
   min-height: 50px;
   width: 90%;
   border-radius: 5px;
@@ -133,26 +157,80 @@ const NoticeContainer = styled.div`
 const NoticeHead = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 90%;
-  margin: 0px 10px 0px 40px;
+  width: 95%;
+  padding-right:40px;
+  padding-left: 40px;
+  background: #3e4b43;
+  border-radius: 5px;
   color: white;
 `;
 const NoticeBody = styled.body`
-  display: flex;
+
+  color: white;
+  background: linear-gradient(to bottom, #292929, #3b3b3c);
+  border-radius: 5px;
   width: 100%;
+  margin-top: 2%;
+  padding: 10px 20px 20px 0px;
+  /* margin: 0px 10px 0px 40px; */
 `;
-const NoticeNum = styled.h3`
-  font-size: 120%;
-`;
+
 const NoticeTitle = styled.h3`
   font-size: 120%;
 `;
-const NoticeWriter = styled.h3`
-  font-size: 120%;
+const DataContainer = styled.div`
+display: flex;
+justify-content: space-between;
+margin: 20px 10px 40px 40px;
+padding-bottom: 20px;
+border-bottom: 1px solid rgb(94, 94, 94);
 `;
-const NoticeDate = styled.h3`
-  font-size: 120%;
+const DataNum = styled.div`
+`;
+const DataTitle = styled.div`
+`;
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 1000px;
+  margin: 10px auto;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
+  /* color: white;
+  font-size: 20px; */
 `;
 
+const PageNum = styled.div`
+  /* position: relative; */
+  display: flex;
+  /* width: 20px;
+  height: 40px; */
+`;
+
+const NumButton = styled.div`
+  margin: 0 1rem;
+  background: #676060;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #207520;
+    color: white;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+const PrevBtn = styled.button`
+`;
+const NextBtn = styled.button`
+`;
 export default Notice;
-  
