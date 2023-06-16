@@ -72,7 +72,7 @@ const Notice = () => {
                 <PageContainer>
                 <PrevBtn> {"<"} </PrevBtn>
                 <PageNum>
-                {Array.from({ length: 15 }, (value, i) => (
+                {Array.from({ length: Math.min(MaxPage,10) }, (value, i) => (
                   <NumButton
                     onClick={() => {
                       setPage(i + 1);
