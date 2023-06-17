@@ -13,7 +13,7 @@ const Notice = () => {
   const [isWriteOpen, setIsWriteOpen] = useState(false);
   const [Page,setPage] = useState(1);
   const MaxPage = Math.ceil(noticeData.length / 10);
-
+  console.log("page",Page)
   const getNoticeData = async () => {
     const APIURL = "http://localhost:3100";
     axios.get(`${APIURL}/board/posts`).then((response) => {
@@ -70,9 +70,12 @@ const Notice = () => {
                   })}
                 </NoticeBody>
                 <PageContainer>
-                <PrevBtn> {"<"} </PrevBtn>
+                <PrevBtn onClick={()=>{
+                        Page>1 && (setPage(Page-1));
+                      }}> {"<"} </PrevBtn>
                 <PageNum>
                 {Array.from({ length: Math.min(MaxPage,10) }, (value, i) => (
+                  // Math.min(MaxPage,10)
                   <NumButton
                     onClick={() => {
                       setPage(i + 1);
@@ -80,8 +83,13 @@ const Notice = () => {
                   >
                     {i + 1}
                   </NumButton>
+                
+
                 ))}
-                <NextBtn> {">"} </NextBtn>
+              <NextBtn
+                      onClick={()=>{
+                       Page<10 && (setPage(Page+1));
+                      }}> {">"} </NextBtn>
               </PageNum>
             </PageContainer>
               </NoticeContainer>
@@ -184,6 +192,7 @@ justify-content: space-between;
 margin: 20px 10px 40px 40px;
 padding-bottom: 20px;
 border-bottom: 1px solid rgb(94, 94, 94);
+min-width: 1000px;
 `;
 const DataNum = styled.div`
 `;
@@ -194,6 +203,7 @@ const PageContainer = styled.div`
   justify-content: center;
   width: 1000px;
   margin: 10px auto;
+
   /* margin-top: 20px;
   margin-bottom: 20px; */
   /* color: white;
@@ -230,7 +240,34 @@ const NumButton = styled.div`
   }
 `;
 const PrevBtn = styled.button`
+  background: #848282;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0.5rem ;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    background: #ffffff;
+    color: #212121;
+    /* transition: all 1s ease; */
+  } 
 `;
 const NextBtn = styled.button`
+  background: #848282;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0.5rem ;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    background: #ffffff;
+    color: #212121;
+  } 
 `;
 export default Notice;
